@@ -1,7 +1,8 @@
 from django import forms
 from django.core.validators import ValidationError
-
 from home.models import Article, Messages
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
 
 
 class ContactUsForm(forms.Form):
@@ -38,3 +39,39 @@ class MessagesForm(forms.ModelForm):
     class Meta:
         model = Messages
         fields = ('title', 'text', 'email',)
+        # fields = '__all__'
+
+        # Set Css for fields
+        widgets = {
+            'title': forms.TextInput(attrs={
+                "class": "form-control",
+                "placeholder": "Enter Your Title",
+
+            })
+        }
+
+
+class AuthenticationForm(forms.Form):
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'input100'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'input100'}))
+
+    # class Meta:
+    #     model = User
+    #     fields = ('username', 'password')
+    #
+    #     widgets = {
+    #         "username":forms.CharField(att),
+    #     }
+
+    def clean_password(self):
+        user = authenticate(username=self.cleaned_data.get('username'), password=self.cleaned_data.get('password'))
+        if user is not None:
+            return self.cleaned_data.get('username')
+        else:
+            return ValidationError("username or Passoword are wrong", code='login_error')
+
+
+class UserEditForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'email', 'username')
