@@ -7,7 +7,6 @@ from django.contrib.auth.models import User
 
 # Create your views here.
 def contact(request):
-    form = MessagesForm()
     if request.method == "POST":
         form = MessagesForm(request.POST)
         if form.is_valid():
@@ -22,7 +21,7 @@ def contact(request):
         else:
             print("chakhan")
     else:
-        print("chakhan2")
+        form = MessagesForm()
 
     return render(request, 'account/contact.html', context={'form': form})
 

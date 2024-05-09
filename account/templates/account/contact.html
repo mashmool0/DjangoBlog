@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load my_template_tags %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,7 +20,7 @@
                     <div class="col-lg-12">
                         <div class="text-content">
                             <h4>contact us</h4>
-                            <h2>let’s stay in touch!</h2>
+                            <h2>{% show_result "amir" %}</h2>
                         </div>
                     </div>
                 </div>
@@ -39,23 +39,24 @@
                                 <div class="sidebar-item contact-form">
                                     <div class="sidebar-heading">
                                         <h2>Send us a message</h2>
+                                        <h3>{% show_result "amir" %}</h3>
                                     </div>
                                     <div class="content">
                                         <form id="contact" action="" method="post">
                                             {% csrf_token %}
                                             <div class="col-lg-12">
-{#                                                {% if form.non_field_errors %}#}
-{#                                                    <div class="alert alert-danger">{{ form.non_field_errors }}</div>#}
-{#                                                {% endif %}#}
-{##}
-{#                                                {% if form.text.errors %}#}
-{#                                                    <div class="alert alert-danger">خاک تو سرت شد</div>#}
-{#                                                {% endif %}#}
-{#                                                {{ form.text }}#}
-{#                                                {% if form.name.errors %}#}
-{#                                                    <div class="alert alert-danger">{{ form.name.errors }}</div>#}
-{#                                                {% endif %}#}
-{#                                                {{ form.name }}#}
+                                                {#                                                {% if form.non_field_errors %}#}
+                                                {#                                                    <div class="alert alert-danger">{{ form.non_field_errors }}</div>#}
+                                                {#                                                {% endif %}#}
+                                                {##}
+                                                {#                                                {% if form.text.errors %}#}
+                                                {#                                                    <div class="alert alert-danger">خاک تو سرت شد</div>#}
+                                                {#                                                {% endif %}#}
+                                                {#                                                {{ form.text }}#}
+                                                {#                                                {% if form.name.errors %}#}
+                                                {#                                                    <div class="alert alert-danger">{{ form.name.errors }}</div>#}
+                                                {#                                                {% endif %}#}
+                                                {#                                                {{ form.name }}#}
                                                 {{ form }}
                                                 <fieldset>
                                                     <button type="submit" id="form-submit" class="main-button">Send
@@ -63,7 +64,7 @@
                                                     </button>
                                                 </fieldset>
                                             </div>
-                                            </form>
+                                        </form>
                                     </div>
 
                                 </div>

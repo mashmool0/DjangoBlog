@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load filters %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -62,7 +63,7 @@
                                                 <li><a href="#">12 Comments</a></li>
                                             </ul>
                                             <p>
-                                                {{ blog_article.description_complete }}
+                                                {{ blog_article.description_complete|cutter:100}}
                                                 <a
                                                         rel="nofollow"
                                                         href="https://templatemo.com/contact"
