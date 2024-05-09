@@ -3,6 +3,8 @@ from .forms import ContactUsForm, MessagesForm, AuthenticationForm, UserEditForm
 from home.models import Messages
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
+from django.views.generic.base import View
+from django.shortcuts import HttpResponse
 
 
 # Create your views here.
@@ -58,3 +60,10 @@ def user_edit(request):
             form.save()
 
     return render(request, 'account/edit.html', context={"form": form})
+
+
+class TestBaseView(View):
+    name = "amir gol"
+
+    def get(self, request):
+        return HttpResponse(self.name)
