@@ -53,9 +53,9 @@ def user_edit(request):
     user = request.user
     form = UserEditForm(instance=user)  # instance yani taraf vaghti miad input haro bebine barash khodkar m
     # izare mager bakhed taghir bedee khodesh
-    if request.method == "POST" :
-        form = UserEditForm(instance=user,data=request.POST)
-        if form.is_valid() :
+    if request.method == "POST":
+        form = UserEditForm(instance=user, data=request.POST)
+        if form.is_valid():
             form.save()
 
-    return render(request, 'account/edit.html',context={"form":form})
+    return render(request, 'account/edit.html', context={"form": form})

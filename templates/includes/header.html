@@ -37,24 +37,24 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'contactus_app:contactus' %}">Contact Us</a>
                     </li>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html"></a>
-                        <a class="nav-link" href="contact.html"></a>
-                    </li>
                     {% if request.user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'contactus_app:logout' %}">Logout</a>
-                        </li>{% endif %}
+                            <a class="nav-link" href="">{{ request.user.username }}</a>
+                        </li>
+                    {% endif %}
 
-                    <li class="nav-item">
-                        {% if request.user.is_authenticated %}
-                        <p style="display: inline-block">{{ request.user.username }}</p>
-                        {% endif %}
-                        <a class="nav-link" href="{% url 'contactus_app:login' %}">Login</a>
-                        <a class="nav-link" href="">Register</a>
 
-                    </li>
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-danger" style="color: white"
+                               href="{% url 'contactus_app:logout' %}">Logout</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'contactus_app:login' %}">Login</a>
+                            <a class="nav-link" href="">Register</a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
