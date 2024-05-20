@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
-from .forms import ContactUsForm, MessagesForm, AuthenticationForm, UserEditForm
+from .forms import ContactUsForm, MessagesForm, AuthenticationForm, UserEditForm, RegisterForm
 from home.models import Messages
 from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.views.generic.base import View
 from django.shortcuts import HttpResponse
+from django.views.generic import TemplateView
 
 
 # Create your views here.
@@ -45,6 +46,21 @@ def user_login(request):
     return render(request, 'account/authentication.html', context={"form": form})
 
 
+def user_register(request):
+    if request.method == "POST":
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            user = User.objects.create_user(username=form.cleaned_data.get('fullname'),
+                                            password=form.cleaned_data.get("password1"))
+            user.groups.add(Group.objects.get(name="Student"))
+            login(request, user)
+            return redirect('home')
+    else:
+        form = RegisterForm()
+
+    return render(request, 'account/register.html', {'form': form})
+
 def user_logout(request):
     logout(request)
     return redirect('home')
@@ -60,10 +76,3 @@ def user_edit(request):
             form.save()
 
     return render(request, 'account/edit.html', context={"form": form})
-
-
-class TestBaseView(View):
-    name = "amir gol"
-
-    def get(self, request):
-        return HttpResponse(self.name)
