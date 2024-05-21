@@ -6,6 +6,8 @@ from django.contrib.auth.models import User, Group
 from django.views.generic.base import View
 from django.shortcuts import HttpResponse
 from django.views.generic import TemplateView
+from .decorators import unauthenticated_user, only_student_user
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -29,6 +31,7 @@ def contact(request):
     return render(request, 'account/contact.html', context={'form': form})
 
 
+@unauthenticated_user
 def user_login(request):
     if request.method == "POST":
         form = AuthenticationForm(request.POST)
@@ -46,6 +49,7 @@ def user_login(request):
     return render(request, 'account/authentication.html', context={"form": form})
 
 
+@unauthenticated_user
 def user_register(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
@@ -66,18 +70,24 @@ def user_register(request):
     return render(request, 'account/register.html', {'form': form})
 
 
+@login_required(login_url="/account/login")
 def user_logout(request):
     logout(request)
     return redirect('home')
 
 
+@login_required(login_url="/account/login")
 def user_edit(request):
     user = request.user
-    form = UserEditForm(instance=user)  # instance yani taraf vaghti miad input haro bebine barash khodkar m
-    # izare mager bakhed taghir bedee khodesh
+    form = UserEditForm(instance=user)
     if request.method == "POST":
         form = UserEditForm(instance=user, data=request.POST)
         if form.is_valid():
             form.save()
 
     return render(request, 'account/edit.html', context={"form": form})
+
+
+@only_student_user
+def student_information(request):
+    return render(request, 'account/information.html', context={})
