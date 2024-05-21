@@ -80,7 +80,7 @@ class RegisterForm(forms.ModelForm):
             'fullname': forms.TextInput(
                 attrs={'class': 'input100', 'name': 'username', 'placeholder': 'Enter your full name'}),
             'phone_number': forms.TextInput(
-                attrs={'class': 'input100', 'name': 'username', 'placeholder': 'Enter your phone number'}),
+                attrs={'class': 'input100', 'name': 'username', 'maxlength': '11', 'placeholder': '9122222222'}),
             'codeID': forms.TextInput(
                 attrs={'class': 'input100', 'name': 'username', 'placeholder': 'Enter your code ID'}),
             'email': forms.EmailInput(

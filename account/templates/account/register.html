@@ -42,9 +42,12 @@
                 <span class="login100-form-title p-b-34 p-t-27">
 						Register
 					</span>
-                {% if form.non_field_errors %}
-                    <p>{{ form.non_field_errors }}</p>
-                {% endif %}
+                {% for error in form.errors %}
+                    {{ error }}
+                {% endfor %}
+
+
+                <p>{{ form.non_field_errors }}</p>
                 <div class="wrap-input100 validate-input" data-validate="Enter username">
                     {{ form.fullname }}
                     <span class="focus-input100" data-placeholder="&#xf207;"></span>
@@ -56,6 +59,13 @@
                     {{ form.email }}
                     <span class="focus-input100" data-placeholder="&#xf207;"></span>
                     {% for error in form.email.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div class="wrap-input100 validate-input" data-validate="Enter email">
+                    {{ form.phone_number }}
+                    <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                    {% for error in form.phone_number.errors %}
                         <p>{{ error }}</p>
                     {% endfor %}
                 </div>
@@ -77,7 +87,7 @@
                     {{ form.password2 }}
                     <span class="focus-input100" data-placeholder="&#xf191;"></span>
                     {% for error in form.password2.errors %}
-                        <p>{{ error }}</p>
+                        <p class="bg-danger text-white">{{ error }}</p>
                     {% endfor %}
                 </div>
                 <div class="contact100-form-checkbox">

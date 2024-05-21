@@ -54,12 +54,17 @@ def user_register(request):
             user = User.objects.create_user(username=form.cleaned_data.get('fullname'),
                                             password=form.cleaned_data.get("password1"))
             user.groups.add(Group.objects.get(name="Student"))
+            print("HI")
             login(request, user)
             return redirect('home')
+        else:
+            print("Form is not valid")
     else:
+        print("post nabood")
         form = RegisterForm()
 
     return render(request, 'account/register.html', {'form': form})
+
 
 def user_logout(request):
     logout(request)

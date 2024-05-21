@@ -26,13 +26,13 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="about.html">About Us</a>
+                        <a class="nav-link" href="">About Us</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'blog' %}">Blog Entries</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="post-details.html">Post Details</a>
+                        <a class="nav-link" href="">Post Details</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'contactus_app:contactus' %}">Contact Us</a>
@@ -52,7 +52,7 @@
                     {% else %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'contactus_app:login' %}">Login</a>
-                            <a class="nav-link" href="">Register</a>
+                            <a class="nav-link" href="{% url 'contactus_app:register' %}">Register</a>
                         </li>
                     {% endif %}
                 </ul>
